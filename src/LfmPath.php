@@ -241,7 +241,7 @@ class LfmPath
         } elseif ($file->getError() == UPLOAD_ERR_INI_SIZE) {
             return $this->error('file-size', ['max' => ini_get('upload_max_filesize')]);
         } elseif ($file->getError() != UPLOAD_ERR_OK) {
-            throw new \Exception('File failed to upload. Error code: ' . $file->getError());
+            return $this->error('file-failed', ['code' => $file->getError()]);
         }
 
         $new_file_name = $this->getNewName($file);
