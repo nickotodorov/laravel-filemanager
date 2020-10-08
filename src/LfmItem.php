@@ -12,7 +12,7 @@ class LfmItem
     private $isDirectory;
     private $mimeType = null;
 
-    private $columns = ['name', 'url', 'time', 'icon', 'is_file', 'is_image', 'thumb_url'];
+    private $columns = ['name', 'url', 'time', 'icon', 'is_file', 'is_image', 'thumb_url', 'size', 'resolution'];
     public $attributes = [];
 
     public function __construct(LfmPath $lfm, Lfm $helper, $isDirectory = false)
@@ -99,6 +99,15 @@ class LfmItem
         }
 
         return $this->lfm->url();
+    }
+
+    public function resolution()
+    {
+        if ($this->isImage()) {
+            $data = getimagesize($this->path());
+            return $data[0] . 'x' . $data[1];
+        }
+        return null;
     }
 
     public function size()
