@@ -104,8 +104,10 @@ class LfmItem
     public function resolution()
     {
         if ($this->isImage()) {
-            $data = getimagesize($this->path());
-            return $data[0] . 'x' . $data[1];
+            $data = @getimagesize($this->path());
+            if (isset($data[0]) && isset($data[1])) {
+                return $data[0] . 'x' . $data[1];
+            }
         }
         return null;
     }
