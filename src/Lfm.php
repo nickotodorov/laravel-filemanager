@@ -232,7 +232,7 @@ class Lfm
      */
     public function error($error_type, $variables = [])
     {
-        return trans(self::PACKAGE_NAME . '::lfm.error-' . $error_type);
+        throw new \Exception(trans(self::PACKAGE_NAME . '::lfm.error-' . $error_type, $variables));
     }
 
     /**
